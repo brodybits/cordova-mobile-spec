@@ -140,10 +140,10 @@ var top_dir =             process.cwd() + path.sep,
                                                       "\t\t\tCannot be used with --global because it is implied when --global is used.")
                    .boolean("clearnpmcache").describe("clearnpmcache", "rm -rf ~/.npm/cache; rm -rf ~/.plugman")
                    .string("plugins").describe("plugins", "Used to explicitly specify the list of plugins to be installed.\n" +
-                                               "Example: --plugins=\"cordova-plugin-device cordova-plugin-file-transfer my-custom-plugin\"")
+                                               "\t\t\tExample: --plugins=\"cordova-plugin-device cordova-plugin-file-transfer my-custom-plugin\"")
                    .boolean("forceplugins").describe("forceplugins", "Add the --force flag when adding plugins\n")
                    .string("variable").describe("variable", "Used to pass preferences / variables down to cordova components (like plugins).\n" +
-                                               "Example: --variable FILETRANSFER_SERVER_ADDRESS=\"http://yourlocal-IPAddressHere:5000\"")
+                                               "\t\t\tExample: --variable FILETRANSFER_SERVER_ADDRESS=\"http://yourlocal-IPAddressHere:5000\"")
                    .boolean("skipjs").describe("skipjs", "Do not update the platform's cordova.js from the js git repo, use the one already present in the platform.\n" +
                                                "\t\t\tRarely used, generally to test RC releases.\n" +
                                                "\t\t\tCannot be used with --global because it is implied when --global is used.")
@@ -153,11 +153,11 @@ var top_dir =             process.cwd() + path.sep,
                    .boolean("linkplatforms").describe("linkplatforms", "Use the --link flag when running `cordova platform add`.\n")
                    .boolean("link").describe("link", "Alias for --linkplugins --linkplatforms.\n")
                    .boolean("browserify").describe("browserify", "Use the --browserify flag when running `cordova plugin add`.\n")
-                   .boolean("telerikplugins").describe("telerikplugins", "Adds a bunch of known-to-be-popular plugins from Telerik-Verified-Plugins.\n")
-                   .boolean("cprplugins").describe("cprplugins", "Adds a bunch of known-to-be-popular plugins from Cordova Plugin Regsitry.\n")
-                   .boolean("plugregplugins").describe("cprplugins", "Adds a bunch of known-to-be-popular plugins from PlugReg (that are not on the CPR).\n")
-                   .boolean("thirdpartyplugins").describe("thirdpartyplugins", "Alias for --telerikplugins --cprplugins --plugregplugins.\n")
-                   .string("webview").describe("webview", "Use --webview=crosswalk to install the crosswalk plugin")
+                   .boolean("telerikplugins").describe("telerikplugins", "Adds a bunch of known-to-be-popular plugins from Telerik-Verified-Plugins.\n") // TODO
+                   .boolean("cprplugins").describe("cprplugins", "Adds a bunch of known-to-be-popular plugins from Cordova Plugin Regsitry.\n") // TODO
+                   .boolean("plugregplugins").describe("cprplugins", "Adds a bunch of known-to-be-popular plugins from PlugReg (that are not on the CPR).\n") // TODO
+                   .boolean("thirdpartyplugins").describe("thirdpartyplugins", "Alias for --telerikplugins --cprplugins --plugregplugins.\n") // TODO
+                   .string("webview").describe("webview", "Use --webview=crosswalk to install the crosswalk plugin") // TODO
                    .alias("h", "help")
                    .argv;
 
@@ -227,6 +227,7 @@ var DEFAULT_PLUGINS = [
     'cordova-plugin-statusbar',
     'cordova-plugin-vibration',
     'cordova-plugin-whitelist',
+    // TODO check if all are listed
 ];
 
 // OSX has little support for the most of the plugins, so it gets its own default list
@@ -303,7 +304,7 @@ var cli = argv.global ? "cordova" : cli_local_bin;
 
 var projectDirName = argv._[0] || "mobilespec";
 var cli_project_dir = path.join(top_dir, projectDirName);
-var browserifyFlag = argv.browserify ? ' --browserify' : '';
+var browserifyFlag = argv.browserify ? ' --browserify' : ''; // TODO
 var variableFlag = '';
 // some plugins support setting config.xml <preference> elements via a --variable flag.
 if (argv.variable) {
@@ -318,7 +319,7 @@ if (argv.variable) {
 // Print relevant information
 if (!fs.existsSync(path.join("cordova-coho", "coho"))) {
     console.log("You need to clone cordova-coho:");
-    console.log("  git clone https://git-wip-us.apache.org/repos/asf/cordova-coho.git");
+    console.log("  git clone https://git-wip-us.apache.org/repos/asf/cordova-coho.git"); // TODO
     process.exit(3);
 }
 if (argv.global) {
