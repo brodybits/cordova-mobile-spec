@@ -410,7 +410,7 @@ function verifyNpmLinkOf(linkedModule, installedModule) {
     if (fs.existsSync(linkedPath)) {
         var myStat = fs.lstatSync(linkedPath);
         if (!myStat.isSymbolicLink()) {
-            throw new Error('Module ' + linkedModule + ' installed in ' + installedModule + ' is not npm-linked. I recommend you run "coho npm-link".'); // TODO angleichen an andere commands
+            throw new Error('Module ' + linkedModule + ' installed in ' + installedModule + ' is not npm-linked. I recommend you run "coho npm-link".');
         }
     } else {
         throw new Error('Module ' + linkedModule + ' is not installed at all (direct or npm-linked) in ' + installedModule);
