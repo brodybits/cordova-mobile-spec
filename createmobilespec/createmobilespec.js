@@ -135,7 +135,7 @@ var top_dir =             process.cwd() + path.sep,
                    .boolean("windows").describe("windows", "Add Windows (universal) platform.")
                    .boolean("wp8").describe("wp8", "Add Windows Phone 8 platform.")
                    .boolean("firefoxos").describe("firefoxos", "Add FirefoxOS platform.")
-                   .boolean("plugman").describe("plugman", "Use {platform}/bin/create and plugman directly instead of the CLI.") // TODO Why would one want to do that?
+                   .boolean("plugman").describe("plugman", "Use {platform}/bin/create and plugman directly instead of the CLI.")
                    .boolean("global").describe("global", "Use the globally-installed `cordova` and the downloaded platforms/plugins from the registry instead of the local git repo.\n" +
                                                "\t\t\tWill use the local git repo of mobile-spec.\n" +
                                                "\t\t\tGenerally used only to test RC or production releases.\n" +
