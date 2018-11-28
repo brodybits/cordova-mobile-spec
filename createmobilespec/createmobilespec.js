@@ -139,7 +139,6 @@ var top_dir =             process.cwd() + path.sep,
                    .boolean("linkplugins").describe("linkplugins", "Use the --link flag when running `cordova plugin add`.\n")
                    .boolean("linkplatforms").describe("linkplatforms", "Use the --link flag when running `cordova platform add`.\n")
                    .boolean("link").describe("link", "Alias for --linkplugins --linkplatforms.\n")
-                   .boolean("browserify").describe("browserify", "Use the --browserify flag when running `cordova plugin add`.\n")
                    .string("webview").describe("webview", "Use --webview=crosswalk to install the crosswalk plugin")
                    .alias("h", "help")
                    .argv;
@@ -238,7 +237,6 @@ var cli = argv.global ? "cordova" : cli_local_bin;
 
 var projectDirName = argv._[0] || "mobilespec";
 var cli_project_dir = path.join(top_dir, projectDirName);
-var browserifyFlag = argv.browserify ? ' --browserify' : '';
 var variableFlag = '';
 // some plugins support setting config.xml <preference> elements via a --variable flag.
 if (argv.variable) {
@@ -505,7 +503,7 @@ function installPlugins() {
                 shelljs.exec(nodeCommand + path.join(top_dir, "cordova-plugman", "main.js") +
                              " install --platform " + platform +
                              " --project . --plugin " + plugin +
-                             " --searchpath " + top_dir + browserifyFlag);
+                             " --searchpath " + top_dir);
             });
 
             // Install new-style test plugins
@@ -516,7 +514,7 @@ function installPlugins() {
                 if (fs.existsSync(potential_tests_plugin_xml)) {
                     shelljs.exec(nodeCommand + path.join(top_dir, "cordova-plugman", "main.js") +
                                 " install --platform " + platform +
-                                " --project . --plugin " + path.dirname(potential_tests_plugin_xml) + browserifyFlag);
+                                " --project . --plugin " + path.dirname(potential_tests_plugin_xml));
                 }
             });
             popd();
@@ -534,7 +532,7 @@ function installPlugins() {
         console.log("Installing local test framework plugins...");
         var linkPluginsFlag = (argv.link || argv.linkplugins) ? ' --link' : '';
         var forcePluginsFlag = (argv.forceplugins)? ' --force' : '';
-        var allPluginFlags = linkPluginsFlag + browserifyFlag + variableFlag + forcePluginsFlag;
+        var allPluginFlags = linkPluginsFlag + variableFlag + forcePluginsFlag;
 
         // Install mobilespec tests only if we install default list of plugins
         // If custom list of plugins is being installed, mobilespec tests can be listed there, if needed
@@ -626,7 +624,7 @@ function summary() {
 
         // Executing cordova prepare
         console.log("Preparing project...");
-        shelljs.exec(cli + " prepare" + browserifyFlag);
+        shelljs.exec(cli + " prepare");
 
         if (!argv.global) {
             console.log("Linking CLI...");
